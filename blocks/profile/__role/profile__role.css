@@ -1,0 +1,25 @@
+.profile__role {
+  margin: 7px 0 0 0;
+  padding: 0;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+@media screen and (max-width: 900px) {
+  .profile__role {
+    text-align: center;
+    margin-bottom: 26px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .profile__role {
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 14px;
+    margin-bottom: 33px;
+  }
+}
