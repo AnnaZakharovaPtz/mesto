@@ -1,0 +1,31 @@
+.profile-edit-popup__save {
+  margin: 18px 36px 35px 36px;
+  padding: 0;
+  width: 358px;
+  height: 50px;
+  background-color: #000000;
+  border-radius: 2px;
+  cursor: pointer;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.profile-edit-popup__save:hover {
+  opacity: .8;
+}
+
+@media screen and (max-width: 600px) {
+  .profile-edit-popup__save {
+    margin: 15px 22px 25px 22px;
+    width: 238px;
+    height: 46px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

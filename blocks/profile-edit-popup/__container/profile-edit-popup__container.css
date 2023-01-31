@@ -1,0 +1,14 @@
+.profile-edit-popup__container {
+  display: flex;
+  flex-direction: column;
+  width: 502px;
+  height: 370px;
+}
+
+
+@media screen and (max-width: 600px) {
+  .profile-edit-popup__container {
+    width: 282px;
+    height: 358px;
+  }
+}

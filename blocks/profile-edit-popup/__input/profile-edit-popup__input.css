@@ -1,0 +1,17 @@
+.profile-edit-popup__input {
+  margin: 0 auto 30px auto;
+  padding: 0;
+  width: 358px;
+  height: 27px;
+  opacity: .2;
+  border-bottom: 1px solid #000000;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+@media screen and (max-width: 600px) {
+  .profile-edit-popup__input {
+    width: 238px;
+  }
+}
