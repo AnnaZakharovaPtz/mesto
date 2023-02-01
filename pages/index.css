@@ -33,3 +33,4 @@
 @import url(../blocks/profile-edit-popup/__header/profile-edit-popup__header.css);
 @import url(../blocks/profile-edit-popup/__input/profile-edit-popup__input.css);
 @import url(../blocks/profile-edit-popup/__save/profile-edit-popup__save.css);
+@import url(../blocks/profile-edit-popup/_opened/profile-edit-popup_opened.css);
