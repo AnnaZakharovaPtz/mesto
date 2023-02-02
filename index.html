@@ -20,76 +20,78 @@
         <img class="profile__image" src="./images/profile-image.jpg" alt="Фото пользователя">
         <div class="profile__info">
           <div class="profile__header">
-            <p class="profile__name">Жак-Ив Кусто</p>
-            <button class="profile__edit-button"></button>
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="profile__edit-button" type="button" aria-label="Редактировать"></button>
           </div>
           <p class="profile__job">Исследователь океана</p>
         </div>
-        <button class="profile__add-button"></button>
+        <button class="profile__add-button" type="button" aria-label="Добавить"></button>
       </section>
 
-      <section class="cards">
-        <div class="card">
-          <img class="card__image" src="./images/karachaevsk.jpg" alt="Старинный замок в Карачаевске">
-          <div class="card__caption">
-            <p class="card__name">Карачаевск</p>
-            <div class="card__like-button"></div>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/elbrus.jpg" alt="Эльбрус на закате">
-          <div class="card__caption">
-            <p class="card__name">Гора Эльбрус</p>
-            <div class="card__like-button"></div>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/dombai.jpg" alt="Горы и лес в пасмурную погоду">
-          <div class="card__caption">
-            <p class="card__name">Домбай</p>
-            <div class="card__like-button"></div>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/elbrus.jpg" alt="Эльбрус на закате">
-          <div class="card__caption">
-            <p class="card__name">Гора Эльбрус</p>
-            <div class="card__like-button"></div>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/dombai.jpg" alt="Горы и лес в пасмурную погоду">
-          <div class="card__caption">
-            <p class="card__name">Домбай</p>
-            <div class="card__like-button"></div>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/karachaevsk.jpg" alt="Старинный замок в Карачаевске">
-          <div class="card__caption">
-            <p class="card__name">Карачаево-Черкесия</p>
-            <div class="card__like-button"></div>
-          </div>
-        </div>
+      <section>
+        <ul class="cards">
+          <li class="cards__item">
+            <img class="cards__image" src="./images/karachaevsk.jpg" alt="Старинный замок в Карачаевске">
+            <div class="cards__caption">
+              <h2 class="cards__name">Карачаевск</h2>
+              <button class="cards__like-button" type="button" aria-label="Нравится"></button>
+            </div>
+          </li>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/elbrus.jpg" alt="Эльбрус на закате">
+            <div class="cards__caption">
+              <h2 class="cards__name">Гора Эльбрус</h2>
+              <button class="cards__like-button" type="button" aria-label="Нравится" class="card__like-button"></button>
+            </div>
+          </li>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/dombai.jpg" alt="Горы и лес в пасмурную погоду">
+            <div class="cards__caption">
+              <h2 class="cards__name">Домбай</h2>
+              <button class="cards__like-button" type="button" aria-label="Нравится"></button>
+            </div>
+          </li>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/elbrus.jpg" alt="Эльбрус на закате">
+            <div class="cards__caption">
+              <h2 class="cards__name">Гора Эльбрус</h2>
+              <button class="cards__like-button" type="button" aria-label="Нравится"></button>
+            </div>
+          </li>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/dombai.jpg" alt="Горы и лес в пасмурную погоду">
+            <div class="cards__caption">
+              <h2 class="cards__name">Домбай</h2>
+              <button class="cards__like-button" type="button" aria-label="Нравится"></button>
+            </div>
+          </li>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/karachaevsk.jpg" alt="Старинный замок в Карачаевске">
+            <div class="cards__caption">
+              <h2 class="cards__name">Карачаево-Черкесия</h2>
+              <button class="cards__like-button" type="button" aria-label="Нравится"></button>
+            </div>
+          </li>
+        </ul>
       </section>
     </main>
 
     <footer class="footer">
-      <p class="footer__copyright">&copy;&nbsp;2023 Mesto Russia, Anna Zakharova</p>
+      <p class="footer__copyright">&copy;&nbsp;2023 Mesto Russia</p>
     </footer>
   </div>
 
-  <section class="profile-edit-popup">
-    <div class="profile-edit-popup__container">
-      <button class="profile-edit-popup__close"></button>
-      <form class="profile-edit-popup__form">
-        <h2 class="profile-edit-popup__header">Редактировать профиль</h2>
-        <input class="profile-edit-popup__input" type="text" id="profile-name">
-        <input class="profile-edit-popup__input" type="text" id="profile-job">
-        <button class="profile-edit-popup__save">Сохранить</button>
+  <div class="popup">
+    <div class="popup__container">
+      <button class="popup__close" type="button" aria-label="Закрыть"></button>
+      <form class="profile-edit-form">
+        <h2 class="profile-edit-form__header">Редактировать профиль</h2>
+        <input class="profile-edit-form__input" type="text" id="profile-name" name="name">
+        <input class="profile-edit-form__input" type="text" id="profile-job" name="job">
+        <button class="profile-edit-form__save" type="submit">Сохранить</button>
       </form>
     </div>
-  </section>
+  </div>
 
   <script src="./scripts/index.js"></script>
 </body>

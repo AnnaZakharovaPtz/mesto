@@ -17,20 +17,21 @@
 @import url(../blocks/profile/__job/profile__job.css);
 
 @import url(../blocks/cards/cards.css);
-@import url(../blocks/card/card.css);
-@import url(../blocks/card/__caption/card__caption.css);
-@import url(../blocks/card/__image/card__image.css);
-@import url(../blocks/card/__like-button/card__like-button.css);
-@import url(../blocks/card/__name/card__name.css);
+@import url(../blocks/cards/__item/cards__item.css);
+@import url(../blocks/cards/__caption/cards__caption.css);
+@import url(../blocks/cards/__image/cards__image.css);
+@import url(../blocks/cards/__like-button/cards__like-button.css);
+@import url(../blocks/cards/__like-button/_active/cards__like-button_active.css);
+@import url(../blocks/cards/__name/cards__name.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
-@import url(../blocks/profile-edit-popup/profile-edit-popup.css);
-@import url(../blocks/profile-edit-popup/__close/profile-edit-popup__close.css);
-@import url(../blocks/profile-edit-popup/__container/profile-edit-popup__container.css);
-@import url(../blocks/profile-edit-popup/__form/profile-edit-popup__form.css);
-@import url(../blocks/profile-edit-popup/__header/profile-edit-popup__header.css);
-@import url(../blocks/profile-edit-popup/__input/profile-edit-popup__input.css);
-@import url(../blocks/profile-edit-popup/__save/profile-edit-popup__save.css);
-@import url(../blocks/profile-edit-popup/_opened/profile-edit-popup_opened.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__close/popup__close.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/profile-edit-form/profile-edit-form.css);
+@import url(../blocks/profile-edit-form/__header/profile-edit-form__header.css);
+@import url(../blocks/profile-edit-form/__input/profile-edit-form__input.css);
+@import url(../blocks/profile-edit-form/__save/profile-edit-form__save.css);

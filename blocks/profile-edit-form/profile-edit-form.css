@@ -1,4 +1,4 @@
-.profile-edit-popup__form {
+.profile-edit-form {
   align-self: center;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
 }
 
 @media screen and (max-width: 600px) {
-  .profile-edit-popup__form {
+  .profile-edit-form {
     width: 282px;
     height: 322px;
   }
