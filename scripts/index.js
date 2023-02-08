@@ -72,17 +72,71 @@ const addCardButton = document.querySelector('.profile__add-button');
 const newCardPopup = document.querySelector('#new-card-popup');
 const closeNewCardPopupButton = newCardPopup.querySelector('.popup__close');
 
+const newCardPopupForm = newCardPopup.querySelector('.form');
+const newCardNameInput = newCardPopupForm.querySelector('#place-name');
+const newCardImageInput = newCardPopupForm.querySelector('#place-image');
+
 function handleAddCardButtonClick() {
+  newCardNameInput.value = '';
+  newCardImageInput.value = '';
   newCardPopup.classList.add('popup_opened');
+}
+
+function handleNewCardPopupFormSubmit(evt) {
+  evt.preventDefault();
+
+  const cardsContainer = document.querySelector('.cards');
+  const cardTemplate = document.querySelector('#card').content;
+  const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true);
+
+  cardElement.querySelector('.cards__image').src = newCardImageInput.value;
+  cardElement.querySelector('.cards__name').textContent = newCardNameInput.value;
+  cardsContainer.prepend(cardElement);
+
+  const delButton = cardElement.querySelector('.cards__delete-button');
+  delButton.addEventListener('click', () => {
+    cardElement.remove();
+  });
+
+  const likeButton = cardElement.querySelector('.cards__like-button');
+  likeButton.addEventListener('click', () => {
+    likeButton.classList.toggle('cards__like-button_active');
+  });
+
+  handleCloseNewCardPopupButtonClick();
 }
 
 function handleCloseNewCardPopupButtonClick() {
   newCardPopup.classList.remove('popup_opened');
 }
 
+
+
 loadCards();
 editButton.addEventListener('click', handleEditButtonClick);
 profilePopupForm.addEventListener('submit', handlePopupFormSubmit);
 closeProfilePopupButton.addEventListener('click', handleCloseProfilePopupButtonClick);
 addCardButton.addEventListener('click', handleAddCardButtonClick);
+newCardPopupForm.addEventListener('submit', handleNewCardPopupFormSubmit);
 closeNewCardPopupButton.addEventListener('click', handleCloseNewCardPopupButtonClick);
+
+
+
+const likeButtonList = document.querySelectorAll('.cards__like-button');
+
+likeButtonList.forEach(likeButton => {
+  likeButton.addEventListener('click', function (evt) {
+    const eventTarget = evt.target;
+    eventTarget.classList.toggle('cards__like-button_active');
+  });
+});
+
+
+const delButtonList = document.querySelectorAll('.cards__delete-button');
+
+delButtonList.forEach(delButton => {
+  delButton.addEventListener('click', () => {
+    const cardsItem = delButton.closest('.cards__item');
+    cardsItem.remove();
+  });
+});
