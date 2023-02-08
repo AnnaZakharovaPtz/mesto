@@ -29,50 +29,7 @@
       </section>
 
       <section>
-        <ul class="cards">
-          <li class="cards__item">
-            <img class="cards__image" src="./images/karachaevsk.jpg" alt="Старинный замок в Карачаевске">
-            <div class="cards__caption">
-              <h2 class="cards__name">Карачаевск</h2>
-              <button class="cards__like-button" type="button" aria-label="Нравится"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img class="cards__image" src="./images/elbrus.jpg" alt="Эльбрус на закате">
-            <div class="cards__caption">
-              <h2 class="cards__name">Гора Эльбрус</h2>
-              <button class="cards__like-button" type="button" aria-label="Нравится"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img class="cards__image" src="./images/dombai.jpg" alt="Горы и лес в пасмурную погоду">
-            <div class="cards__caption">
-              <h2 class="cards__name">Домбай</h2>
-              <button class="cards__like-button" type="button" aria-label="Нравится"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img class="cards__image" src="./images/elbrus.jpg" alt="Эльбрус на закате">
-            <div class="cards__caption">
-              <h2 class="cards__name">Гора Эльбрус</h2>
-              <button class="cards__like-button" type="button" aria-label="Нравится"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img class="cards__image" src="./images/dombai.jpg" alt="Горы и лес в пасмурную погоду">
-            <div class="cards__caption">
-              <h2 class="cards__name">Домбай</h2>
-              <button class="cards__like-button" type="button" aria-label="Нравится"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img class="cards__image" src="./images/karachaevsk.jpg" alt="Старинный замок в Карачаевске">
-            <div class="cards__caption">
-              <h2 class="cards__name">Карачаево-Черкесия</h2>
-              <button class="cards__like-button" type="button" aria-label="Нравится"></button>
-            </div>
-          </li>
-        </ul>
+        <ul class="cards"> </ul>
       </section>
     </main>
 
@@ -81,17 +38,40 @@
     </footer>
   </div>
 
-  <div class="popup">
+  <div class="popup" id="profile-popup">
     <div class="popup__container">
       <button class="popup__close" type="button" aria-label="Закрыть"></button>
-      <form class="profile-edit-form">
-        <h2 class="profile-edit-form__header">Редактировать профиль</h2>
-        <input class="profile-edit-form__input" type="text" id="profile-name" name="name">
-        <input class="profile-edit-form__input" type="text" id="profile-job" name="job">
-        <button class="profile-edit-form__save" type="submit">Сохранить</button>
+      <form class="form">
+        <h2 class="form__header">Редактировать профиль</h2>
+        <input class="form__input" type="text" id="profile-name" name="name" placeholder="Имя">
+        <input class="form__input" type="text" id="profile-job" name="job" placeholder="О себе">
+        <button class="form__save" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
+
+  <div class="popup" id="new-card-popup">
+    <div class="popup__container">
+      <button class="popup__close" type="button" aria-label="Закрыть"></button>
+      <form class="form">
+        <h2 class="form__header">Новое место</h2>
+        <input class="form__input" type="text" id="place-name" name="place-name" placeholder="Название">
+        <input class="form__input" type="text" id="place-image" name="place-img" placeholder="Ссылка на картинку">
+        <button class="form__save" type="submit">Создать</button>
+      </form>
+    </div>
+  </div>
+
+  <template id="card">
+    <li class="cards__item">
+      <img class="cards__image" src="" alt="">
+      <button class="cards__delete-button" type="button" aria-label="Удалить"></button>
+      <div class="cards__caption">
+        <h2 class="cards__name"></h2>
+        <button class="cards__like-button" type="button" aria-label="Нравится"></button>
+      </div>
+    </li>
+  </template>
 
   <script src="./scripts/index.js"></script>
 </body>

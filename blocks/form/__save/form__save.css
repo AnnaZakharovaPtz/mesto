@@ -1,4 +1,4 @@
-.profile-edit-form__save {
+.form__save {
   margin: 18px 36px 35px 36px;
   padding: 0;
   width: 358px;
@@ -15,12 +15,12 @@
   color: #FFFFFF;
 }
 
-.profile-edit-form__save:hover {
+.form__save:hover {
   opacity: .8;
 }
 
 @media screen and (max-width: 600px) {
-  .profile-edit-form__save {
+  .form__save {
     margin: 15px 22px 25px 22px;
     width: 238px;
     height: 46px;

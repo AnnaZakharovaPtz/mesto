@@ -1,4 +1,4 @@
-.profile-edit-form__input {
+.form__input {
   margin: 0 auto 30px auto;
   padding: 0;
   width: 358px;
@@ -16,8 +16,12 @@
   color: #000000;
 }
 
+.form__input::placeholder {
+  color: #C4C4C4;
+}
+
 @media screen and (max-width: 600px) {
-  .profile-edit-form__input {
+  .form__input {
     width: 238px;
   }
 }
