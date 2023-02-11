@@ -116,9 +116,12 @@ function handleNewCardPopupFormSubmit(evt) {
   const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true);
 
   if (newCardNameInput.value && newCardImageInput.value) {
-    cardElement.querySelector('.cards__image').src = newCardImageInput.value;
+    const cardImage = cardElement.querySelector('.cards__image');
+    cardImage.setAttribute('src', newCardImageInput.value);
     cardElement.querySelector('.cards__name').textContent = newCardNameInput.value;
     cardsContainer.prepend(cardElement);
+
+    cardImage.addEventListener('click', handleCardImageClick);
 
     const delButton = cardElement.querySelector('.cards__delete-button');
     delButton.addEventListener('click', () => {
