@@ -41,6 +41,7 @@ function handleCardImageClick(evt) {
   const imageCaption = imageParentElement.querySelector('.cards__name').textContent;
   const cardPopupCaptionElement = cardImagePopup.querySelector('.fullscreen-mode__caption');
   cardPopupCaptionElement.textContent = imageCaption;
+  cardPopupImageElement.setAttribute('alt', imageCaption);
 
   cardImagePopup.classList.add('popup_opened');
 }
