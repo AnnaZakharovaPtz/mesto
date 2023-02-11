@@ -1,14 +1,4 @@
 .popup__container {
   display: flex;
   flex-direction: column;
-  width: 502px;
-  min-height: 370px;
-}
-
-
-@media screen and (max-width: 600px) {
-  .popup__container {
-    width: 282px;
-    min-height: 358px;
-  }
 }
