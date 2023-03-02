@@ -31,11 +31,28 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
+function addEscapeButtonListener(popup) {
+  const closePopupOnEsc = function (evt) {
+    if (evt.key === 'Escape') {
+      closePopup(popup);
+      document.removeEventListener('keydown', closePopupOnEsc);
+    }
+  }
+  document.addEventListener('keydown', closePopupOnEsc);
+}
+
+function closePopupOnOverlay(evt, popup) {
+  if (evt.target === popup) {
+    closePopup(popup);
+  }
+}
+
 function handleCardImageClick(item) {
   cardPopupImageElement.src = item.link;
   cardPopupImageElement.alt = item.name;
   cardPopupCaptionElement.textContent = item.name;
   openPopup(cardImagePopup);
+  addEscapeButtonListener(cardImagePopup);
 }
 
 function createCard(item) {
@@ -69,6 +86,7 @@ function loadCards() {
 
 function handleProfileEditButtonClick() {
   openPopup(profilePopup);
+  addEscapeButtonListener(profilePopup);
   profileNameInput.value = profileName.textContent;
   profileJobInput.value = profileJob.textContent;
 }
@@ -84,6 +102,7 @@ function handleCardAddButtonClick() {
   newCardNameInput.value = '';
   newCardImageInput.value = '';
   openPopup(newCardPopup);
+  addEscapeButtonListener(newCardPopup);
 }
 
 function handleNewCardPopupFormSubmit(evt) {
@@ -109,4 +128,13 @@ profilePopupCloseButton.addEventListener('click', () => {
 });
 newCardPopupCloseButton.addEventListener('click', () => {
   closePopup(newCardPopup);
+});
+cardImagePopup.addEventListener('click', (evt) => {
+  closePopupOnOverlay(evt, cardImagePopup);
+});
+profilePopup.addEventListener('click', (evt) => {
+  closePopupOnOverlay(evt, profilePopup);
+});
+newCardPopup.addEventListener('click', (evt) => {
+  closePopupOnOverlay(evt, newCardPopup);
 });
