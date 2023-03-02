@@ -41,10 +41,14 @@
   <div class="popup" id="profile-popup">
     <div class="popup__container">
       <button class="popup__close" type="button" aria-label="Закрыть"></button>
-      <form class="form">
+      <form class="form" novalidate>
         <h2 class="form__header">Редактировать профиль</h2>
-        <input class="form__input" type="text" id="profile-name" name="name" placeholder="Имя">
-        <input class="form__input" type="text" id="profile-job" name="job" placeholder="О себе">
+        <input class="form__input" type="text" id="profile-name" name="name" placeholder="Имя" minlength="2"
+          maxlength="40" required>
+        <span class="form__input-error" id="profile-name-error"></span>
+        <input class="form__input" type="text" id="profile-job" name="job" placeholder="О себе" minlength="2"
+          maxlength="200" required>
+        <span class="form__input-error" id="profile-job-error"></span>
         <button class="form__save" type="submit">Сохранить</button>
       </form>
     </div>
@@ -53,10 +57,14 @@
   <div class="popup" id="new-card-popup">
     <div class="popup__container">
       <button class="popup__close" type="button" aria-label="Закрыть"></button>
-      <form class="form">
+      <form class="form" novalidate>
         <h2 class="form__header">Новое место</h2>
-        <input class="form__input" type="text" id="place-name" name="place-name" placeholder="Название">
-        <input class="form__input" type="text" id="place-image" name="place-img" placeholder="Ссылка на картинку">
+        <input class="form__input" type="text" id="place-name" name="place-name" placeholder="Название" minlength="2"
+          maxlength="30" required>
+        <span class="form__input-error" id="place-name-error"></span>
+        <input class="form__input" type="url" id="place-image" name="place-img" placeholder="Ссылка на картинку"
+          required>
+        <span class="form__input-error" id="place-image-error"></span>
         <button class="form__save" type="submit">Создать</button>
       </form>
     </div>
@@ -84,6 +92,7 @@
   </template>
 
   <script src="./scripts/cards.js"></script>
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 

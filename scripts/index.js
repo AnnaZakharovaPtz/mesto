@@ -22,6 +22,14 @@ const newCardPopupForm = newCardPopup.querySelector('.form');
 const newCardNameInput = newCardPopupForm.querySelector('#place-name');
 const newCardImageInput = newCardPopupForm.querySelector('#place-image');
 
+const validationConfig = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__save',
+  inactiveButtonClass: 'form__save_disabled',
+  inputErrorClass: 'form__input_type_error'
+}
+
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -85,14 +93,14 @@ function loadCards() {
 }
 
 function handleProfileEditButtonClick() {
-  openPopup(profilePopup);
   addEscapeButtonListener(profilePopup);
   profileNameInput.value = profileName.textContent;
   profileJobInput.value = profileJob.textContent;
+  toggleButton(profilePopupForm, validationConfig);
+  openPopup(profilePopup);
 }
 
 function handleProfilePopupFormSubmit(evt) {
-  evt.preventDefault();
   profileName.textContent = profileNameInput.value;
   profileJob.textContent = profileJobInput.value;
   closePopup(profilePopup);
@@ -101,12 +109,12 @@ function handleProfilePopupFormSubmit(evt) {
 function handleCardAddButtonClick() {
   newCardNameInput.value = '';
   newCardImageInput.value = '';
-  openPopup(newCardPopup);
+  toggleButton(newCardPopupForm, validationConfig);
   addEscapeButtonListener(newCardPopup);
+  openPopup(newCardPopup);
 }
 
 function handleNewCardPopupFormSubmit(evt) {
-  evt.preventDefault();
   const cardData = { 'name': newCardNameInput.value, 'link': newCardImageInput.value };
   const cardElement = createCard(cardData);
 
@@ -138,3 +146,5 @@ profilePopup.addEventListener('click', (evt) => {
 newCardPopup.addEventListener('click', (evt) => {
   closePopupOnOverlay(evt, newCardPopup);
 });
+
+enableValidation(validationConfig);
