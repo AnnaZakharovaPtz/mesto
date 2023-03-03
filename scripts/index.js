@@ -33,20 +33,19 @@ const validationConfig = {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupOnEsc);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupOnEsc);
 }
 
-function addEscapeButtonListener(popup) {
-  const closePopupOnEsc = function (evt) {
-    if (evt.key === 'Escape') {
-      closePopup(popup);
-      document.removeEventListener('keydown', closePopupOnEsc);
-    }
+function closePopupOnEsc(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
   }
-  document.addEventListener('keydown', closePopupOnEsc);
 }
 
 function closePopupOnOverlay(evt, popup) {
@@ -60,7 +59,6 @@ function handleCardImageClick(item) {
   cardPopupImageElement.alt = item.name;
   cardPopupCaptionElement.textContent = item.name;
   openPopup(cardImagePopup);
-  addEscapeButtonListener(cardImagePopup);
 }
 
 function createCard(item) {
@@ -93,31 +91,27 @@ function loadCards() {
 }
 
 function handleProfileEditButtonClick() {
-  addEscapeButtonListener(profilePopup);
   profileNameInput.value = profileName.textContent;
   profileJobInput.value = profileJob.textContent;
   toggleButton(profilePopupForm, validationConfig);
   openPopup(profilePopup);
 }
 
-function handleProfilePopupFormSubmit(evt) {
+function handleProfilePopupFormSubmit() {
   profileName.textContent = profileNameInput.value;
   profileJob.textContent = profileJobInput.value;
   closePopup(profilePopup);
 }
 
 function handleCardAddButtonClick() {
-  newCardNameInput.value = '';
-  newCardImageInput.value = '';
+  newCardPopupForm.reset();
   toggleButton(newCardPopupForm, validationConfig);
-  addEscapeButtonListener(newCardPopup);
   openPopup(newCardPopup);
 }
 
-function handleNewCardPopupFormSubmit(evt) {
+function handleNewCardPopupFormSubmit() {
   const cardData = { 'name': newCardNameInput.value, 'link': newCardImageInput.value };
   const cardElement = createCard(cardData);
-
   cardsContainer.prepend(cardElement);
   closePopup(newCardPopup);
 }
