@@ -1,5 +1,7 @@
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+
 const cardsContainer = document.querySelector('.cards');
-const cardTemplate = document.querySelector('#card').content;
 
 const cardImagePopup = document.querySelector('#card-image-popup');
 const cardImagePopupCloseButton = cardImagePopup.querySelector('.popup__close');
@@ -54,39 +56,17 @@ function closePopupOnOverlay(evt, popup) {
   }
 }
 
-function handleCardImageClick(item) {
-  cardPopupImageElement.src = item.link;
-  cardPopupImageElement.alt = item.name;
-  cardPopupCaptionElement.textContent = item.name;
+function handleCardImageClick(name, link) {
+  cardPopupImageElement.src = link;
+  cardPopupImageElement.alt = name;
+  cardPopupCaptionElement.textContent = name;
   openPopup(cardImagePopup);
-}
-
-function createCard(item) {
-  const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true);
-  const cardImage = cardElement.querySelector('.cards__image');
-  const cardLikeButton = cardElement.querySelector('.cards__like-button');
-  const cardDeleteButton = cardElement.querySelector('.cards__delete-button');
-
-  cardElement.querySelector('.cards__image').src = item.link;
-  cardElement.querySelector('.cards__image').alt = item.name;
-  cardElement.querySelector('.cards__name').textContent = item.name;
-
-  cardImage.addEventListener('click', () => handleCardImageClick(item));
-  cardLikeButton.addEventListener('click', () => {
-    cardLikeButton.classList.toggle('cards__like-button_active');
-  });
-  cardDeleteButton.addEventListener('click', () => {
-    const cardsItem = cardDeleteButton.closest('.cards__item');
-    cardsItem.remove();
-  });
-
-  return cardElement;
 }
 
 function loadCards() {
   initialCards.forEach(function (item) {
-    const card = createCard(item);
-    cardsContainer.append(card);
+    const card = new Card(item.name, item.link, '#card', handleCardImageClick);
+    cardsContainer.append(card.createCard());
   });
 }
 
@@ -111,8 +91,8 @@ function handleCardAddButtonClick() {
 
 function handleNewCardPopupFormSubmit() {
   const cardData = { 'name': newCardNameInput.value, 'link': newCardImageInput.value };
-  const cardElement = createCard(cardData);
-  cardsContainer.prepend(cardElement);
+  const newCard = new Card(cardData.name, cardData.link, '#card');
+  cardsContainer.prepend(newCard.createCard());
   closePopup(newCardPopup);
 }
 
