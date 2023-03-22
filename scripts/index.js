@@ -31,6 +31,11 @@ const validationConfig = {
   inactiveButtonClass: 'form__save_disabled',
   inputErrorClass: 'form__input_type_error'
 }
+const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
+formList.forEach((item) => {
+  const formValidator = new FormValidator(validationConfig, item);
+  formValidator.enableValidation();
+});
 
 
 function openPopup(popup) {
@@ -73,7 +78,6 @@ function loadCards() {
 function handleProfileEditButtonClick() {
   profileNameInput.value = profileName.textContent;
   profileJobInput.value = profileJob.textContent;
-  toggleButton(profilePopupForm, validationConfig);
   openPopup(profilePopup);
 }
 
@@ -85,13 +89,12 @@ function handleProfilePopupFormSubmit() {
 
 function handleCardAddButtonClick() {
   newCardPopupForm.reset();
-  toggleButton(newCardPopupForm, validationConfig);
   openPopup(newCardPopup);
 }
 
 function handleNewCardPopupFormSubmit() {
   const cardData = { 'name': newCardNameInput.value, 'link': newCardImageInput.value };
-  const newCard = new Card(cardData.name, cardData.link, '#card');
+  const newCard = new Card(cardData.name, cardData.link, '#card', handleCardImageClick);
   cardsContainer.prepend(newCard.createCard());
   closePopup(newCardPopup);
 }
@@ -120,5 +123,3 @@ profilePopup.addEventListener('click', (evt) => {
 newCardPopup.addEventListener('click', (evt) => {
   closePopupOnOverlay(evt, newCardPopup);
 });
-
-enableValidation(validationConfig);
