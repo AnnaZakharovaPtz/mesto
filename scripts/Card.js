@@ -11,15 +11,17 @@ class Card {
   }
 
   _handleDeleteButton = () => {
-    this._deleteButton.closest('.cards__item').remove();
+    this._cardElement.remove();
+    this._cardElement = null;
   }
 
   createCard() {
     const cardTemplate = document.querySelector(this._templateId).content;
     this._cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true);
 
-    this._cardElement.querySelector('.cards__image').src = this._imageLink;
-    this._cardElement.querySelector('.cards__image').alt = this._name;
+    this._imageElement = this._cardElement.querySelector('.cards__image');
+    this._imageElement.src = this._imageLink;
+    this._imageElement.alt = this._name;
     this._cardElement.querySelector('.cards__name').textContent = this._name;
 
     this._likeButton = this._cardElement.querySelector('.cards__like-button');
@@ -28,7 +30,6 @@ class Card {
     this._deleteButton = this._cardElement.querySelector('.cards__delete-button');
     this._deleteButton.addEventListener('click', this._handleDeleteButton);
 
-    this._imageElement = this._cardElement.querySelector('.cards__image');
     this._imageElement.addEventListener('click', () => { this._handleImageClick(this._name, this._imageLink) });
 
     return this._cardElement;

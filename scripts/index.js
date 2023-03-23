@@ -1,3 +1,4 @@
+import initialCards from "./cards.js"
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 
@@ -61,6 +62,10 @@ function closePopupOnOverlay(evt, popup) {
   }
 }
 
+function createCard(item) {
+  return new Card(item.name, item.link, '#card', handleCardImageClick);
+}
+
 function handleCardImageClick(name, link) {
   cardPopupImageElement.src = link;
   cardPopupImageElement.alt = name;
@@ -70,7 +75,7 @@ function handleCardImageClick(name, link) {
 
 function loadCards() {
   initialCards.forEach(function (item) {
-    const card = new Card(item.name, item.link, '#card', handleCardImageClick);
+    const card = createCard(item);
     cardsContainer.append(card.createCard());
   });
 }
@@ -81,7 +86,8 @@ function handleProfileEditButtonClick() {
   openPopup(profilePopup);
 }
 
-function handleProfilePopupFormSubmit() {
+function handleProfilePopupFormSubmit(evt) {
+  evt.preventDefault();
   profileName.textContent = profileNameInput.value;
   profileJob.textContent = profileJobInput.value;
   closePopup(profilePopup);
@@ -89,12 +95,16 @@ function handleProfilePopupFormSubmit() {
 
 function handleCardAddButtonClick() {
   newCardPopupForm.reset();
+  const submitButton = newCardPopupForm.querySelector(validationConfig.submitButtonSelector);
+  submitButton.disabled = true;
+  submitButton.classList.add(validationConfig.inactiveButtonClass);
   openPopup(newCardPopup);
 }
 
-function handleNewCardPopupFormSubmit() {
+function handleNewCardPopupFormSubmit(evt) {
+  evt.preventDefault();
   const cardData = { 'name': newCardNameInput.value, 'link': newCardImageInput.value };
-  const newCard = new Card(cardData.name, cardData.link, '#card', handleCardImageClick);
+  const newCard = createCard(cardData);
   cardsContainer.prepend(newCard.createCard());
   closePopup(newCardPopup);
 }

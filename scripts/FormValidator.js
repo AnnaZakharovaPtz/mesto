@@ -33,7 +33,6 @@ class FormValidator {
   }
 
   enableValidation() {
-    this._form.addEventListener('submit', (evt) => evt.preventDefault());
     this._form.addEventListener('input', () => {
       this._toggleButton();
     });
