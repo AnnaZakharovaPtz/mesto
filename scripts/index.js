@@ -32,12 +32,10 @@ const validationConfig = {
   inactiveButtonClass: 'form__save_disabled',
   inputErrorClass: 'form__input_type_error'
 }
-const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
-formList.forEach((item) => {
-  const formValidator = new FormValidator(validationConfig, item);
-  formValidator.enableValidation();
-});
-
+const profileFormValidator = new FormValidator(validationConfig, profilePopupForm);
+const newCardFormValidator = new FormValidator(validationConfig, newCardPopupForm);
+profileFormValidator.enableValidation();
+newCardFormValidator.enableValidation();
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -63,7 +61,8 @@ function closePopupOnOverlay(evt, popup) {
 }
 
 function createCard(item) {
-  return new Card(item.name, item.link, '#card', handleCardImageClick);
+  const card = new Card(item.name, item.link, '#card', handleCardImageClick);
+  return card.createCard();
 }
 
 function handleCardImageClick(name, link) {
@@ -75,14 +74,14 @@ function handleCardImageClick(name, link) {
 
 function loadCards() {
   initialCards.forEach(function (item) {
-    const card = createCard(item);
-    cardsContainer.append(card.createCard());
+    cardsContainer.append(createCard(item));
   });
 }
 
 function handleProfileEditButtonClick() {
   profileNameInput.value = profileName.textContent;
   profileJobInput.value = profileJob.textContent;
+  profileFormValidator.toggleButton();
   openPopup(profilePopup);
 }
 
@@ -95,17 +94,14 @@ function handleProfilePopupFormSubmit(evt) {
 
 function handleCardAddButtonClick() {
   newCardPopupForm.reset();
-  const submitButton = newCardPopupForm.querySelector(validationConfig.submitButtonSelector);
-  submitButton.disabled = true;
-  submitButton.classList.add(validationConfig.inactiveButtonClass);
+  newCardFormValidator.toggleButton();
   openPopup(newCardPopup);
 }
 
 function handleNewCardPopupFormSubmit(evt) {
   evt.preventDefault();
   const cardData = { 'name': newCardNameInput.value, 'link': newCardImageInput.value };
-  const newCard = createCard(cardData);
-  cardsContainer.prepend(newCard.createCard());
+  cardsContainer.prepend(createCard(cardData));
   closePopup(newCardPopup);
 }
 

@@ -16,7 +16,7 @@ class FormValidator {
     }
   }
 
-  _toggleButton() {
+  toggleButton() {
     const buttonSubmit = this._form.querySelector(this._config.submitButtonSelector);
     const isFormValid = this._form.checkValidity();
     buttonSubmit.disabled = !isFormValid;
@@ -34,11 +34,11 @@ class FormValidator {
 
   enableValidation() {
     this._form.addEventListener('input', () => {
-      this._toggleButton();
+      this.toggleButton();
     });
 
     this._addInputListeners();
-    this._toggleButton();
+    this.toggleButton();
   }
 }
 
