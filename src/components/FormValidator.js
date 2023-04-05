@@ -2,6 +2,8 @@ class FormValidator {
   constructor(config, formElement) {
     this._config = config;
     this._form = formElement;
+    this._buttonSubmit = this._form.querySelector(this._config.submitButtonSelector);
+    this._inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
   }
 
   _checkInputValidity(input) {
@@ -17,15 +19,13 @@ class FormValidator {
   }
 
   toggleButton() {
-    const buttonSubmit = this._form.querySelector(this._config.submitButtonSelector);
     const isFormValid = this._form.checkValidity();
-    buttonSubmit.disabled = !isFormValid;
-    buttonSubmit.classList.toggle(this._config.inactiveButtonClass, !isFormValid);
+    this._buttonSubmit.disabled = !isFormValid;
+    this._buttonSubmit.classList.toggle(this._config.inactiveButtonClass, !isFormValid);
   }
 
   _addInputListeners() {
-    const inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
-    inputList.forEach((item) => {
+    this._inputList.forEach((item) => {
       item.addEventListener('input', (evt) => {
         this._checkInputValidity(evt.target);
       });

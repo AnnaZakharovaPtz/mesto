@@ -58,11 +58,10 @@
       <button class="popup__close" type="button" aria-label="Закрыть"></button>
       <form class="form" novalidate>
         <h2 class="form__header">Новое место</h2>
-        <input class="form__input" type="text" id="place-name" name="place-name" placeholder="Название" minlength="2"
+        <input class="form__input" type="text" id="place-name" name="name" placeholder="Название" minlength="2"
           maxlength="30" required>
         <span class="form__input-error" id="place-name-error"></span>
-        <input class="form__input" type="url" id="place-image" name="place-img" placeholder="Ссылка на картинку"
-          required>
+        <input class="form__input" type="url" id="place-image" name="link" placeholder="Ссылка на картинку" required>
         <span class="form__input-error" id="place-image-error"></span>
         <button class="form__save" type="submit">Создать</button>
       </form>

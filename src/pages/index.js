@@ -15,11 +15,14 @@ function handleCardImageClick(name, link) {
   cardImagePopup.open(link, name);
 }
 
+function createCard(item) {
+  const card = new Card(item.name, item.link, '#card', handleCardImageClick);
+  return card.createCard();
+}
+
 function handleProfileEditButtonClick() {
   const data = userInfo.getUserInfo();
-  const popupForm = profilePopup.getForm('.form');
-  popupForm.querySelector('#profile-name').value = data.userName;
-  popupForm.querySelector('#profile-job').value = data.userInfo;
+  profilePopup.setInputValues(data);
   profileFormValidator.toggleButton();
   profilePopup.open();
 }
@@ -39,13 +42,7 @@ userInfo.setUserInfo('Жак-Ив Кусто', 'Исследователь ок�
 const cardsList = new Section({
   items: initialCards,
   renderer: (cardItem) => {
-    const card = new Card(
-      cardItem.name,
-      cardItem.link,
-      '#card',
-      handleCardImageClick
-    );
-    const cardElement = card.createCard();
+    const cardElement = createCard(cardItem);
     cardsList.addItem(cardElement);
   }
 },
@@ -68,13 +65,7 @@ profilePopup.setEventListeners();
 const newCardPopup = new PopupWithForm({
   selector: '#new-card-popup',
   handleFormSubmit: (cardData) => {
-    const newCard = new Card(
-      cardData['place-name'],
-      cardData['place-img'],
-      '#card',
-      handleCardImageClick
-    );
-    const cardElement = newCard.createCard();
+    const cardElement = createCard(cardData);
     cardsList.addItem(cardElement);
     newCardPopup.close();
   }
@@ -83,12 +74,12 @@ newCardPopup.setEventListeners();
 
 const profileFormValidator = new FormValidator(
   validationConfig,
-  profilePopup.getForm('.form'));
+  profilePopup.getForm());
 profileFormValidator.enableValidation();
 
 const newCardFormValidator = new FormValidator(
   validationConfig,
-  newCardPopup.getForm('.form'));
+  newCardPopup.getForm());
 newCardFormValidator.enableValidation();
 
 profileEditButton.addEventListener('click', handleProfileEditButtonClick);
