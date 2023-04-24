@@ -16,7 +16,11 @@
 
     <main>
       <section class="profile">
-        <img class="profile__image" src="<%=require('./images/profile-image.jpg')%>" alt="Фото пользователя">
+        <div class="profile__image-block">
+          <img class="profile__image" src="" alt="Фото пользователя">
+          <button class="profile__edit-image-button" type="button" aria-label="Редактировать">
+          </button>
+        </div>
         <div class="profile__info">
           <div class="profile__header">
             <h1 class="profile__name"></h1>
@@ -53,6 +57,18 @@
     </div>
   </div>
 
+  <div class="popup" id="profile-image-popup">
+    <div class="popup__container">
+      <button class="popup__close" type="button" aria-label="Закрыть"></button>
+      <form class="form" novalidate>
+        <h2 class="form__header">Обновить аватар</h2>
+        <input class="form__input" type="url" id="profile-image" name="link" placeholder="Ссылка на картинку" required>
+        <span class="form__input-error" id="profile-image-error"></span>
+        <button class="form__save" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
   <div class="popup" id="new-card-popup">
     <div class="popup__container">
       <button class="popup__close" type="button" aria-label="Закрыть"></button>
@@ -78,13 +94,26 @@
     </div>
   </div>
 
+  <div class="popup" id="delete-card-popup">
+    <div class="popup__container">
+      <button class="popup__close" type="button" aria-label="Закрыть"></button>
+      <div class="question-mode">
+        <h2 class="question-mode__header">Вы уверены?</h2>
+        <button class="question-mode__ok-button" type="button" aria-label="Да">Да</button>
+      </div>
+    </div>
+  </div>
+
   <template id="card">
     <li class="cards__item">
       <img class="cards__image" src="1">
       <button class="cards__delete-button" type="button" aria-label="Удалить"></button>
       <div class="cards__caption">
         <h2 class="cards__name"></h2>
-        <button class="cards__like-button" type="button" aria-label="Нравится"></button>
+        <div>
+          <button class="cards__like-button" type="button" aria-label="Нравится"></button>
+          <p class="cards__like-counter">12</p>
+        </div>
       </div>
     </li>
   </template>

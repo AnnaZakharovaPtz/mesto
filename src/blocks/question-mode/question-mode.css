@@ -1,19 +1,11 @@
-.form {
+.question-mode {
   align-self: center;
   display: flex;
   flex-direction: column;
   width: 430px;
-  min-height: 272px;
+  min-height: 181px;
   margin: 0 40px 0 40px;
   background-color: #FFFFFF;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
-}
-
-@media screen and (max-width: 600px) {
-  .form {
-    width: 282px;
-    height: 322px;
-    margin: 0;
-  }
 }

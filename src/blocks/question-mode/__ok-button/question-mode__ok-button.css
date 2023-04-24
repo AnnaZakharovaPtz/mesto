@@ -1,0 +1,20 @@
+.question-mode__ok-button {
+  margin: 0px 36px 35px 36px;
+  padding: 0;
+  width: 358px;
+  height: 50px;
+  background-color: #000000;
+  border-radius: 2px;
+  cursor: pointer;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.question-mode__ok-button:hover {
+  opacity: .8;
+}
