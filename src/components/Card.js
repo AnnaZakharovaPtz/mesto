@@ -1,7 +1,8 @@
 export default class Card {
-  constructor({ data, selector, handleImageClick, handleLikeButtonClick, handleDeleteButtonClick }) {
+  constructor({ data, userId, selector, handleImageClick, handleLikeButtonClick, handleDeleteButtonClick }) {
     this._id = data._id;
     this._ownerId = data.owner._id;
+    this._userId = userId;
     this._name = data.name;
     this._imageLink = data.link;
     this._likeCounter = data.likes.length;
@@ -10,11 +11,6 @@ export default class Card {
     this._handleImageClick = handleImageClick;
     this._handleLikeButtonClick = handleLikeButtonClick;
     this._handleDeleteButtonClick = handleDeleteButtonClick;
-  }
-
-  _handleDeleteButton = () => {
-    this._cardElement.remove();
-    this._cardElement = null;
   }
 
   _setEventListeners() {
@@ -31,12 +27,13 @@ export default class Card {
     });
   }
 
-  updateLikeCounter(likes) {
+  updateLikes(likes) {
+    this._likeButton.classList.toggle('cards__like-button_active');
     this._likeCounter = likes;
     this._likeCounterElement.textContent = this._likeCounter;
   }
 
-  createCard(userId) {
+  createCard() {
     const cardTemplate = document.querySelector(this._templateId).content;
     this._cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true);
 
@@ -44,13 +41,13 @@ export default class Card {
     this._likeCounterElement = this._cardElement.querySelector('.cards__like-counter');
     this._likeCounterElement.textContent = this._likeCounter;
     this._likes.forEach(item => {
-      if (item._id === userId) {
+      if (item._id === this._userId) {
         this._likeButton.classList.add('cards__like-button_active');
       }
     });
 
     this._deleteButton = this._cardElement.querySelector('.cards__delete-button');
-    if (this._ownerId === userId) {
+    if (this._ownerId === this._userId) {
       this._deleteButton.hidden = false;
     } else {
       this._deleteButton.hidden = true;
@@ -63,6 +60,11 @@ export default class Card {
 
     this._setEventListeners();
     return this._cardElement;
+  }
+
+  removeCard() {
+    this._cardElement.remove();
+    this._cardElement = null;
   }
 }
 

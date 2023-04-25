@@ -17,29 +17,45 @@ let userId = '';
 function createCard(item) {
   const card = new Card({
     data: item,
+    userId: userId,
     selector: '#card',
     handleImageClick: (name, link) => {
       cardImagePopup.open(link, name);
     },
     handleLikeButtonClick: (button, id) => {
       if (button.classList.contains('cards__like-button_active')) {
-        api.removeCardLike(id).then(data => {
-          button.classList.remove('cards__like-button_active');
-          card.updateLikeCounter(data.likes.length);
-        });
+        api.removeCardLike(id)
+          .then(data => {
+            card.updateLikes(data.likes.length);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       } else {
-        api.addCardLike(id).then(data => {
-          button.classList.add('cards__like-button_active');
-          card.updateLikeCounter(data.likes.length);
-        });
+        api.addCardLike(id)
+          .then(data => {
+            card.updateLikes(data.likes.length);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     },
     handleDeleteButtonClick: (id) => {
-      deleteCardPopup.setCardId(id);
+      deleteCardPopup.setOkHandler(() => {
+        api.deleteCard(id)
+          .then(() => {
+            deleteCardPopup.close();
+            card.removeCard();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
       deleteCardPopup.open();
     }
   });
-  return card.createCard(userId);
+  return card.createCard();
 }
 
 const api = new Api({
@@ -55,15 +71,7 @@ const userInfo = new UserInfo({
   infoSelector: '.profile__job',
   imageSelector: '.profile__image'
 });
-const cardsList = new Section({
-  items: [],
-  renderer: (cardItem) => {
-    const cardElement = createCard(cardItem);
-    cardsList.addItem(cardElement);
-  }
-},
-  '.cards'
-);
+const cardsList = new Section('.cards');
 const userInfoPromise = api.getUserInfo();
 const initialCardsPromise = api.getInitialCards();
 const promises = [userInfoPromise, initialCardsPromise];
@@ -72,8 +80,13 @@ Promise.all(promises)
   .then((data) => {
     userInfo.setUserInfo(data[0].name, data[0].about, data[0].avatar);
     userId = data[0]._id;
-    cardsList.setRenderedItems(data[1]);
-    cardsList.renederItems(data[0]._id);
+    data[1].forEach((card) => {
+      const cardElement = createCard(card);
+      cardsList.addItem(cardElement);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
   });
 
 
@@ -85,9 +98,14 @@ const profilePopup = new PopupWithForm({
       .then(data => {
         userInfo.setUserInfo(data.name, data.about, data.avatar);
         profilePopup.close();
-        profilePopup.setButtonState('Сохранить');
       }
-      );
+      )
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        profilePopup.setButtonState('Сохранить');
+      });
   }
 });
 profilePopup.setEventListeners();
@@ -98,12 +116,16 @@ const profileImagePopup = new PopupWithForm({
     profileImagePopup.setButtonState('Сохранение...');
     api.editUserImage(imageData.link)
       .then(data => {
-        console.log(data);
         userInfo.setUserInfo(data.name, data.about, data.avatar);
         profileImagePopup.close();
-        profileImagePopup.setButtonState('Сохранить');
       }
-      );
+      )
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        profileImagePopup.setButtonState('Сохранить');
+      });
   }
 });
 profileImagePopup.setEventListeners();
@@ -114,9 +136,14 @@ const newCardPopup = new PopupWithForm({
     newCardPopup.setButtonState('Сохранение...');
     api.addNewCard(cardData.name, cardData.link)
       .then(data => {
-        cardsList.insertRenderedItem(data);
-        cardsList.renederItems();
+        const newCardElement = createCard(data);
+        cardsList.addItemToStart(newCardElement);
         newCardPopup.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
         newCardPopup.setButtonState('Создать');
       });
   }
@@ -128,13 +155,7 @@ cardImagePopup.setEventListeners();
 
 const deleteCardPopup = new DeleteCardPopup({
   selector: '#delete-card-popup',
-  handleOkButtonClick: (id) => {
-    api.deleteCard(id).then(data => {
-      deleteCardPopup.close();
-      cardsList.removeRenderedItem(id);
-      cardsList.renederItems();
-    });
-  }
+  handleOkButtonClick: () => { }
 });
 deleteCardPopup.setEventListeners();
 
